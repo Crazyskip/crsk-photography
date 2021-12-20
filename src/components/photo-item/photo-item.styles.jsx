@@ -1,6 +1,7 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-export const PhotoItemContainer = styled.div`
+export const PhotoItemContainer = styled(NavLink)`
   text-align: start;
 `;
 
