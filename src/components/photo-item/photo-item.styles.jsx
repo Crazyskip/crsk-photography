@@ -11,8 +11,12 @@ export const ImageContainer = styled.img`
   margin-bottom: 10px;
 `;
 
-export const TitleContainer = styled.span`
+export const TitleContainer = styled.div`
   font-size: 1rem;
   width: 100%;
   color: #cfcfcf;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
 `;
