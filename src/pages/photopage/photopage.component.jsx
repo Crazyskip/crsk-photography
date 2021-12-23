@@ -1,33 +1,53 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-import { ImageContainer, PhotoPageContainer } from "./photopage.styles";
+import {
+  Heading,
+  ImageContainer,
+  ParagraphContainer,
+  PhotoPageContainer,
+} from "./photopage.styles";
 
-import photosData from "../../data/photos";
-import PageTopper from "../../components/page-topper/page-topper.component";
+const contentful = require("contentful");
+
+const contentfulClient = contentful.createClient({
+  space: process.env.REACT_APP_CONTENTFUL_SPACE_ID,
+  accessToken: process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN,
+});
 
 const PhotoPage = () => {
   const [photo, setPhoto] = useState({});
 
-  const navigate = useNavigate();
-  const { categoryName, photoID } = useParams();
+  const { photoID } = useParams();
+
+  const getPhoto = async () => {
+    const photoData = await contentfulClient.getEntry(photoID);
+    const asset = await contentfulClient.getAsset(
+      photoData.fields.image.sys.id
+    );
+    const imageURL = `${asset.fields.file.url}?w=900&h=600`;
+    setPhoto({
+      title: photoData.fields.title,
+      description: photoData.fields.description,
+      imageURL,
+    });
+  };
 
   useEffect(() => {
-    const photoData = photosData[categoryName].find(
-      (photoItem) => photoItem.id === photoID
-    );
-    if (photoData === undefined) {
-      alert("Photo not found");
-      navigate(-1);
-    } else {
-      setPhoto(photoData);
-    }
+    getPhoto();
   }, []);
 
   return (
     <PhotoPageContainer>
-      <PageTopper title={photo.title} />
-      <ImageContainer src={photo.imgURL} alt={photo.title} />
+      <ImageContainer src={photo.imageURL} alt={photo.title} />
+      <Heading>{photo.title}</Heading>
+      {photo.description
+        ? photo.description.content.map((paragraph, index) => (
+            <ParagraphContainer key={index}>
+              {paragraph.content[0].value}
+            </ParagraphContainer>
+          ))
+        : ""}
     </PhotoPageContainer>
   );
 };

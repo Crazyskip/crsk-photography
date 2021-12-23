@@ -4,7 +4,6 @@ import device from "../../commons/breakpoints";
 export const PhotoPageContainer = styled.div`
   color: #cfcfcf;
   max-width: 90%;
-  text-align: center;
   margin: 0 auto;
 
   @media only screen and ${device.sm} {
@@ -16,7 +15,16 @@ export const PhotoPageContainer = styled.div`
 `;
 
 export const ImageContainer = styled.img`
-  width: 90%;
+  width: 100%;
   height: auto;
+  margin-bottom: 10px;
+`;
+
+export const Heading = styled.h3`
+  font-size: 1.5rem;
+  font-weight: 500;
+`;
+
+export const ParagraphContainer = styled.p`
   margin-bottom: 10px;
 `;

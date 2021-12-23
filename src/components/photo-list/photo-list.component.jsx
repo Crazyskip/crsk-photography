@@ -18,7 +18,7 @@ const PhotoList = ({ photos, type }) => {
         <PhotoItem
           key={photo.title}
           title={photo.title}
-          imgURL={photo.imgURL}
+          imageURL={photo.imageURL}
           linkTo={getLinkTo(photo)}
         />
       ))}

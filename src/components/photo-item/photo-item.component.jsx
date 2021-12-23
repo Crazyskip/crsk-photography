@@ -6,10 +6,10 @@ import {
   TitleContainer,
 } from "./photo-item.styles";
 
-const PhotoItem = ({ imgURL, title, linkTo }) => {
+const PhotoItem = ({ imageURL, title, linkTo }) => {
   return (
     <PhotoItemContainer to={linkTo}>
-      <ImageContainer src={imgURL} alt={title} />
+      <ImageContainer src={imageURL} alt={title} />
       <TitleContainer>{title}</TitleContainer>
     </PhotoItemContainer>
   );
