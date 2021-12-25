@@ -23,17 +23,15 @@ const CategoryPage = () => {
       "fields.name": categoryName,
     });
     const category = response.items[0];
-    const photosList = [];
-    for (const photo of category.fields.photos) {
-      const entry = await contentfulClient.getEntry(photo.sys.id);
-      const asset = await contentfulClient.getAsset(entry.fields.image.sys.id);
-      const imageURL = `${asset.fields.file.url}?w=600&h=400`;
-      photosList.push({
-        id: photo.sys.id,
-        title: photo.fields.title,
-        imageURL,
-      });
-    }
+    const entryPromises = category.fields.photos.map((photo) =>
+      contentfulClient.getEntry(photo.sys.id)
+    );
+    const entries = await Promise.all(entryPromises);
+    const photosList = entries.map((entry) => ({
+      id: entry.sys.id,
+      title: entry.fields.title,
+      imageURL: `${entry.fields.image.fields.file.url}?w=600&h=400`,
+    }));
     setCategoryPhotos(photosList);
   };
 

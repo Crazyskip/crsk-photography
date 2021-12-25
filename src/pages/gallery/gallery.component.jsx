@@ -16,17 +16,13 @@ const GalleryPage = () => {
   const [categories, setCategories] = useState([]);
 
   const getCategories = async () => {
-    const response = await contentfulClient.getEntries({
+    const categoriesResponse = await contentfulClient.getEntries({
       content_type: "category",
     });
-    const categoriesList = [];
-    for (const category of response.items) {
-      const asset = await contentfulClient.getAsset(
-        category.fields.thumbnail.sys.id
-      );
-      const imageURL = `${asset.fields.file.url}?w=600&h=400`;
-      categoriesList.push({ title: category.fields.name, imageURL });
-    }
+    const categoriesList = categoriesResponse.items.map((category) => ({
+      title: category.fields.name,
+      imageURL: `${category.fields.thumbnail.fields.file.url}?w=600&h=400`,
+    }));
     setCategories(categoriesList);
   };
 

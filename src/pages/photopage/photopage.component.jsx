@@ -22,14 +22,10 @@ const PhotoPage = () => {
 
   const getPhoto = async () => {
     const photoData = await contentfulClient.getEntry(photoID);
-    const asset = await contentfulClient.getAsset(
-      photoData.fields.image.sys.id
-    );
-    const imageURL = `${asset.fields.file.url}?w=900&h=600`;
     setPhoto({
       title: photoData.fields.title,
       description: photoData.fields.description,
-      imageURL,
+      imageURL: `${photoData.fields.image.fields.file.url}?w=900&h=600`,
     });
   };
 
