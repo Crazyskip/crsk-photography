@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ParagraphsList from "../../components/paragraphs-list/paragraphs-list.component";
+import WithSpinner from "../../components/with-spinner/with-spinner.component";
 
 import {
   Heading,
@@ -15,18 +17,24 @@ const contentfulClient = contentful.createClient({
   accessToken: process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN,
 });
 
+const ImageContainerWithSpinner = WithSpinner(ImageContainer);
+const ParagraphsListWithSpinner = WithSpinner(ParagraphsList);
+
 const PhotoPage = () => {
   const [photo, setPhoto] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   const { photoID } = useParams();
 
   const getPhoto = async () => {
     const photoData = await contentfulClient.getEntry(photoID);
+
     setPhoto({
       title: photoData.fields.title,
       description: photoData.fields.description,
       imageURL: `${photoData.fields.image.fields.file.url}?w=900&h=600`,
     });
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -35,15 +43,13 @@ const PhotoPage = () => {
 
   return (
     <PhotoPageContainer>
-      <ImageContainer src={photo.imageURL} alt={photo.title} />
+      <ImageContainerWithSpinner
+        isLoading={isLoading}
+        src={photo.imageURL}
+        alt={photo.title}
+      />
       <Heading>{photo.title}</Heading>
-      {photo.description
-        ? photo.description.content.map((paragraph, index) => (
-            <ParagraphContainer key={index}>
-              {paragraph.content[0].value}
-            </ParagraphContainer>
-          ))
-        : ""}
+      <ParagraphsList paragraphs={isLoading ? [] : photo.description.content} />
     </PhotoPageContainer>
   );
 };

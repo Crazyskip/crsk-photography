@@ -24,7 +24,3 @@ export const Heading = styled.h3`
   font-size: 1.5rem;
   font-weight: 500;
 `;
-
-export const ParagraphContainer = styled.p`
-  margin-bottom: 10px;
-`;
