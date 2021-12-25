@@ -6,7 +6,6 @@ import WithSpinner from "../../components/with-spinner/with-spinner.component";
 import {
   Heading,
   ImageContainer,
-  ParagraphContainer,
   PhotoPageContainer,
 } from "./photopage.styles";
 
@@ -18,7 +17,6 @@ const contentfulClient = contentful.createClient({
 });
 
 const ImageContainerWithSpinner = WithSpinner(ImageContainer);
-const ParagraphsListWithSpinner = WithSpinner(ParagraphsList);
 
 const PhotoPage = () => {
   const [photo, setPhoto] = useState({});
