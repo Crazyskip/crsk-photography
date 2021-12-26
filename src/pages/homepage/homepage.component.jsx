@@ -1,12 +1,26 @@
 import React from "react";
-import PageTopper from "../../components/page-topper/page-topper.component";
 
-import { HomePageContainer } from "./homepage.styles";
+import { HomePageContainer, ImageContainer } from "./homepage.styles";
 
-const HomePage = () => (
-  <HomePageContainer>
-    <PageTopper title="HOME" />
-  </HomePageContainer>
-);
+const imageRotation = [
+  "thunderstorm_towers.jpg",
+  "windmill_night.jpg",
+  "drop_on_leaf.jpg",
+  "frangipani.jpg",
+];
+
+const HomePage = () => {
+  return (
+    <HomePageContainer>
+      {imageRotation.map((image) => (
+        <ImageContainer
+          key={image}
+          src={`/assets/home-images/${image}`}
+          alt={`home-image`}
+        />
+      ))}
+    </HomePageContainer>
+  );
+};
 
 export default HomePage;

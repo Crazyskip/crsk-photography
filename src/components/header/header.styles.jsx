@@ -10,6 +10,7 @@ export const HeaderContainer = styled.div`
   align-items: center;
   margin-bottom: 25px;
   padding: 0 20px;
+  z-index: 100;
 `;
 
 export const LogoContainer = styled(Link)`
