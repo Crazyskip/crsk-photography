@@ -1,5 +1,6 @@
 import React from "react";
 import PageTopper from "../../components/page-topper/page-topper.component";
+import Separator from "../../components/separator/separator.component";
 
 import { AboutPageContainer } from "./about.styles";
 
@@ -38,6 +39,9 @@ const AboutPage = () => (
       augue viverra. Cras faucibus nisl turpis, sit amet vehicula lacus
       imperdiet non. Suspendisse egestas ac erat ac efficitur.
     </p>
+    <Separator width="50%" margin="0 auto" />
+    <h2>Equipment Used</h2>
+    <Separator width="50%" margin="0 auto" />
   </AboutPageContainer>
 );
 

@@ -21,11 +21,13 @@ const Header = () => {
         <OptionLink to="/gallery">GALLERY</OptionLink>
         <OptionLink to="/about">ABOUT</OptionLink>
       </OptionsContainer>
+
       <StyledBurger open={open} onClick={() => setOpen(!open)}>
         <span />
         <span />
         <span />
       </StyledBurger>
+
       <StyledMenu open={open}>
         <OptionLink to="/" onClick={() => setOpen(false)}>
           HOME

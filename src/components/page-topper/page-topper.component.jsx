@@ -1,9 +1,11 @@
 import React from "react";
-import { PageTopperContainer } from "./page-topper.styles";
+import Separator from "../separator/separator.component";
+import { PageTopperContainer, Title } from "./page-topper.styles";
 
 const PageTopper = ({ title }) => (
   <PageTopperContainer>
-    {title} <hr />
+    <Title>{title}</Title>
+    <Separator width="100%" margin="40px 0" />
   </PageTopperContainer>
 );
 
