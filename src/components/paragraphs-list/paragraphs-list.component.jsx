@@ -1,15 +1,18 @@
 import react from "react";
 
-import { ParagraphContainer } from "./paragraphs-list.styles";
+import {
+  ParagraphContainer,
+  ParagraphListContainer,
+} from "./paragraphs-list.styles";
 
 const ParagraphsList = ({ paragraphs }) => (
-  <div>
+  <ParagraphListContainer>
     {paragraphs.map((paragraph, index) => (
       <ParagraphContainer key={index}>
         {paragraph.content[0].value}
       </ParagraphContainer>
     ))}
-  </div>
+  </ParagraphListContainer>
 );
 
 export default ParagraphsList;
