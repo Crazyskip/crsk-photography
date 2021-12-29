@@ -107,3 +107,8 @@ export const StyledMenu = styled.nav`
     display: none;
   }
 `;
+
+export const MobileCartOption = styled.div`
+  display: flex;
+  justify-content: center;
+`;
