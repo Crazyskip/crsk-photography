@@ -8,7 +8,6 @@ import { CartItemsContainer, CartPageContainer } from "./cart.styles";
 
 const CartPage = () => {
   const cartItems = useSelector(selectCartItems);
-  console.log(cartItems);
   return (
     <CartPageContainer>
       <PageTopper title="CART" />

@@ -23,3 +23,21 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
 
   return [...cartItems, cartItemToAdd];
 };
+
+export const removeItemFromCart = (cartItems, cartItemToRemove) => {
+  const existingCartItem = cartItems.find((cartItem) =>
+    cartItemsEqual(cartItem, cartItemToRemove)
+  );
+
+  if (existingCartItem.quantity === 1) {
+    return cartItems.filter(
+      (cartItem) => !cartItemsEqual(cartItem, cartItemToRemove)
+    );
+  }
+
+  return cartItems.map((cartItem) =>
+    cartItemsEqual(cartItem, cartItemToRemove)
+      ? { ...cartItem, quantity: cartItem.quantity - 1 }
+      : cartItem
+  );
+};
