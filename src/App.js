@@ -6,17 +6,28 @@ import GalleryPage from "./pages/gallery/gallery.component";
 import Header from "./components/header/header.component";
 import CategoryPage from "./pages/category/category.component";
 import PhotoPage from "./pages/photopage/photopage.component";
+import { useState } from "react";
 
 function App() {
+  const [cartItems, setCartItems] = useState([]);
+
+  const addCartItem = (item) => {
+    console.log(item);
+    setCartItems((prevState) => [...prevState, item]);
+  };
+
   return (
     <div>
-      <Header />
+      <Header cartItems={cartItems} />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/gallery/:categoryName" element={<CategoryPage />} />
-        <Route path="/gallery/:categoryName/:photoID" element={<PhotoPage />} />
+        <Route
+          path="/gallery/:categoryName/:photoID"
+          element={<PhotoPage addCartItem={addCartItem} />}
+        />
       </Routes>
     </div>
   );

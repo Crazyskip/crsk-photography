@@ -10,10 +10,13 @@ import {
   StyledMenu,
 } from "./header.styles";
 
-const Header = () => {
+const Header = ({ cartItems }) => {
   const [open, setOpen] = useState(false);
 
-  const itemCount = 0;
+  const itemCount = cartItems.reduce(
+    (accumulatedQuantity, cartItem) => accumulatedQuantity + cartItem.quantity,
+    0
+  );
 
   return (
     <HeaderContainer>

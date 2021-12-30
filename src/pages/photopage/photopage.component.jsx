@@ -28,7 +28,7 @@ const printSizes = [
   "150 x 100cm",
 ];
 
-const PhotoPage = () => {
+const PhotoPage = ({ addCartItem }) => {
   const [photo, setPhoto] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -44,6 +44,7 @@ const PhotoPage = () => {
     const photoData = await contentfulClient.getEntry(photoID);
 
     setPhoto({
+      id: photoData.sys.id,
       title: photoData.fields.title,
       description: photoData.fields.description,
       imageURL: `${photoData.fields.image.fields.file.url}?w=900&h=600`,
@@ -63,6 +64,13 @@ const PhotoPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(values);
+    console.log(photo.quantity);
+    addCartItem({
+      id: photo.id,
+      printType: values.printType,
+      printSize: values.printSize,
+      quantity: Number(values.quantity),
+    });
   };
 
   return (
