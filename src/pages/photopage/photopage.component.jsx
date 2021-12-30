@@ -52,7 +52,7 @@ const PhotoPage = () => {
       id: photoData.sys.id,
       title: photoData.fields.title,
       description: photoData.fields.description,
-      imageURL: `${photoData.fields.image.fields.file.url}?w=900&h=600`,
+      imageURL: photoData.fields.image.fields.file.url,
     });
     setIsLoading(false);
   };
@@ -71,6 +71,8 @@ const PhotoPage = () => {
     dispatch(
       addItem({
         id: photo.id,
+        title: photo.title,
+        imageURL: photo.imageURL,
         printType: values.printType,
         printSize: values.printSize,
         quantity: Number(values.quantity),
@@ -82,7 +84,7 @@ const PhotoPage = () => {
     <PhotoPageContainer>
       <ImageContainerWithSpinner
         isLoading={isLoading}
-        src={photo.imageURL}
+        src={`${photo.imageURL}?w=900&h=600`}
         alt={photo.title}
       />
       <Heading>{photo.title}</Heading>

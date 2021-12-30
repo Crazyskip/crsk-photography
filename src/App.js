@@ -6,6 +6,7 @@ import GalleryPage from "./pages/gallery/gallery.component";
 import Header from "./components/header/header.component";
 import CategoryPage from "./pages/category/category.component";
 import PhotoPage from "./pages/photopage/photopage.component";
+import CartPage from "./pages/cart/cart.component";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/cart" element={<CartPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/gallery/:categoryName" element={<CategoryPage />} />

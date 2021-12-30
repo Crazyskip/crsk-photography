@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { selectCartItems } from "../../redux/cart/cartSlice";
 import CartIcon from "../cart-icon/cart-icon.component";
 import {
   HeaderContainer,
@@ -15,8 +13,6 @@ import {
 const Header = () => {
   const [open, setOpen] = useState(false);
 
-  const cartItems = useSelector(selectCartItems);
-
   return (
     <HeaderContainer>
       <LogoContainer to="/" onClick={() => setOpen(false)}>
@@ -26,7 +22,7 @@ const Header = () => {
         <OptionLink to="/">HOME</OptionLink>
         <OptionLink to="/gallery">GALLERY</OptionLink>
         <OptionLink to="/about">ABOUT</OptionLink>
-        <OptionLink as="div" onClick={() => console.log(cartItems)}>
+        <OptionLink to="/cart">
           <CartIcon />
         </OptionLink>
       </OptionsContainer>
@@ -47,7 +43,7 @@ const Header = () => {
         <OptionLink to="/about" onClick={() => setOpen(false)}>
           ABOUT
         </OptionLink>
-        <OptionLink as="div" onClick={() => console.log(cartItems)}>
+        <OptionLink to="/cart" onClick={() => setOpen(false)}>
           <MobileCartOption>
             CART <CartIcon />
           </MobileCartOption>
