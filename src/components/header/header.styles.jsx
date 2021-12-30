@@ -9,9 +9,11 @@ export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 25px;
   padding: 0 20px;
   z-index: 100;
+
+  position: fixed;
+  top: 0;
 `;
 
 export const LogoContainer = styled(Link)`

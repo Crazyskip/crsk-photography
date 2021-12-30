@@ -24,7 +24,7 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
   return [...cartItems, cartItemToAdd];
 };
 
-export const removeItemFromCart = (cartItems, cartItemToRemove) => {
+export const decrementItemFromCart = (cartItems, cartItemToRemove) => {
   const existingCartItem = cartItems.find((cartItem) =>
     cartItemsEqual(cartItem, cartItemToRemove)
   );
@@ -39,5 +39,19 @@ export const removeItemFromCart = (cartItems, cartItemToRemove) => {
     cartItemsEqual(cartItem, cartItemToRemove)
       ? { ...cartItem, quantity: cartItem.quantity - 1 }
       : cartItem
+  );
+};
+
+export const incrementItemFromCart = (cartItems, cartItemToAdd) => {
+  return cartItems.map((cartItem) =>
+    cartItemsEqual(cartItem, cartItemToAdd)
+      ? { ...cartItem, quantity: cartItem.quantity + 1 }
+      : cartItem
+  );
+};
+
+export const removeItemFromCart = (cartItems, cartItemToRemove) => {
+  return cartItems.filter(
+    (cartItem) => !cartItemsEqual(cartItem, cartItemToRemove)
   );
 };
