@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import ParagraphsList from "../../components/paragraphs-list/paragraphs-list.component";
 import WithSpinner from "../../components/with-spinner/with-spinner.component";
+
+import { addItem } from "../../redux/cart/cartSlice";
 
 import {
   Heading,
@@ -28,9 +31,11 @@ const printSizes = [
   "150 x 100cm",
 ];
 
-const PhotoPage = ({ addCartItem }) => {
+const PhotoPage = () => {
   const [photo, setPhoto] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+
+  const dispatch = useDispatch();
 
   const [values, setValues] = useState({
     printType: printTypes[0],
@@ -63,14 +68,14 @@ const PhotoPage = ({ addCartItem }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values);
-    console.log(photo.quantity);
-    addCartItem({
-      id: photo.id,
-      printType: values.printType,
-      printSize: values.printSize,
-      quantity: Number(values.quantity),
-    });
+    dispatch(
+      addItem({
+        id: photo.id,
+        printType: values.printType,
+        printSize: values.printSize,
+        quantity: Number(values.quantity),
+      })
+    );
   };
 
   return (
@@ -114,7 +119,7 @@ const PhotoPage = ({ addCartItem }) => {
         </div>
 
         <div>
-          <div>Print Size:</div>
+          <div>Quantity:</div>
           <input
             type="number"
             id="quantity"

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { selectCartItems } from "../../redux/cart/cartSlice";
 import CartIcon from "../cart-icon/cart-icon.component";
 import {
   HeaderContainer,
@@ -10,13 +12,10 @@ import {
   StyledMenu,
 } from "./header.styles";
 
-const Header = ({ cartItems }) => {
+const Header = () => {
   const [open, setOpen] = useState(false);
 
-  const itemCount = cartItems.reduce(
-    (accumulatedQuantity, cartItem) => accumulatedQuantity + cartItem.quantity,
-    0
-  );
+  const cartItems = useSelector(selectCartItems);
 
   return (
     <HeaderContainer>
@@ -27,8 +26,8 @@ const Header = ({ cartItems }) => {
         <OptionLink to="/">HOME</OptionLink>
         <OptionLink to="/gallery">GALLERY</OptionLink>
         <OptionLink to="/about">ABOUT</OptionLink>
-        <OptionLink to="/">
-          <CartIcon itemCount={itemCount} />
+        <OptionLink as="div" onClick={() => console.log(cartItems)}>
+          <CartIcon />
         </OptionLink>
       </OptionsContainer>
 
@@ -48,9 +47,9 @@ const Header = ({ cartItems }) => {
         <OptionLink to="/about" onClick={() => setOpen(false)}>
           ABOUT
         </OptionLink>
-        <OptionLink to="#" onClick={() => setOpen(false)}>
+        <OptionLink as="div" onClick={() => console.log(cartItems)}>
           <MobileCartOption>
-            CART <CartIcon itemCount={itemCount} />
+            CART <CartIcon />
           </MobileCartOption>
         </OptionLink>
       </StyledMenu>
