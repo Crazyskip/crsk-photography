@@ -1,6 +1,7 @@
-# Getting Started with Create React App
+# CRSK Photography
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+* This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).  
+* [Contentful](https://contentful.com) was used as the CMS for storing the image data.
 
 ## Available Scripts
 
