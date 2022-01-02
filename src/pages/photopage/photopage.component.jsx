@@ -5,10 +5,13 @@ import { useForm } from "react-hook-form";
 
 import ParagraphsList from "../../components/paragraphs-list/paragraphs-list.component";
 import WithSpinner from "../../components/with-spinner/with-spinner.component";
+import CustomSelect from "../../components/custom-select/custom-select.component";
+import CustomInput from "../../components/custom-input/custom-input.component";
 
 import { addItem } from "../../redux/cart/cartSlice";
 
 import {
+  FormContainer,
   Heading,
   ImageContainer,
   PhotoPageContainer,
@@ -34,7 +37,7 @@ const printSizes = [
 ];
 
 const PhotoPage = () => {
-  const [photo, setPhoto] = useState({ defaultValues: { quantity: 1 } });
+  const [photo, setPhoto] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   const { photoID } = useParams();
@@ -83,41 +86,33 @@ const PhotoPage = () => {
       />
       <Heading>{photo.title}</Heading>
       <ParagraphsList paragraphs={isLoading ? [] : photo.description.content} />
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <div>Print Type:</div>
-          <select {...register("printType", { required: true })}>
-            {printTypes.map((printType) => (
-              <option key={printType} value={printType}>
-                {printType}
-              </option>
-            ))}
-          </select>
-        </div>
+      <FormContainer onSubmit={handleSubmit(onSubmit)}>
+        <CustomSelect
+          label="Print Type:"
+          values={printTypes}
+          {...register("printType", { required: true })}
+        />
 
-        <div>
-          <div>Print Size:</div>
-          <select {...register("printSize", { required: true })}>
-            {printSizes.map((printSize) => (
-              <option key={printSize} value={printSize}>
-                {printSize}
-              </option>
-            ))}
-          </select>
-        </div>
+        <CustomSelect
+          label="Print Size:"
+          values={printSizes}
+          {...register("printSize", { required: true })}
+        />
 
-        <div>
-          <div>Quantity:</div>
-          <input
-            type="number"
-            min="1"
-            max="500"
-            {...register("quantity", { required: true, min: 1, max: 500 })}
-          />
-        </div>
+        <CustomInput
+          type="number"
+          label="Quantity:"
+          min="1"
+          max="500"
+          {...register("quantity", {
+            required: true,
+            min: 1,
+            max: 500,
+          })}
+        />
 
         <SubmitInput type="submit" value="ADD TO CART" />
-      </form>
+      </FormContainer>
     </PhotoPageContainer>
   );
 };

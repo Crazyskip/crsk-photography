@@ -29,7 +29,7 @@ export const SubmitInput = styled.input`
   background-color: #0743c5;
   color: #ffffff;
   font-size: 0.8rem;
-  margin: 10px; 0;
+  margin: 10px 0;
   font-weight: bold;
   padding: 15px 30px;
   border-radius: 25px;
@@ -38,5 +38,17 @@ export const SubmitInput = styled.input`
   &:hover {
     cursor: pointer;
     background-color: #074dc5;
+  }
+`;
+
+export const FormContainer = styled.form`
+  width: 100%;
+
+  @media only screen and ${device.xs} {
+    width: 50%;
+  }
+
+  @media only screen and ${device.sm} {
+    width: 25%;
   }
 `;
