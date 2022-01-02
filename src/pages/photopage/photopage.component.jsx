@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
+
 import ParagraphsList from "../../components/paragraphs-list/paragraphs-list.component";
 import WithSpinner from "../../components/with-spinner/with-spinner.component";
 
@@ -32,18 +34,16 @@ const printSizes = [
 ];
 
 const PhotoPage = () => {
-  const [photo, setPhoto] = useState({});
+  const [photo, setPhoto] = useState({ defaultValues: { quantity: 1 } });
   const [isLoading, setIsLoading] = useState(true);
 
-  const dispatch = useDispatch();
-
-  const [values, setValues] = useState({
-    printType: printTypes[0],
-    printSize: printSizes[0],
-    quantity: 1,
-  });
-
   const { photoID } = useParams();
+  const dispatch = useDispatch();
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      quantity: 1,
+    },
+  });
 
   const getPhoto = async () => {
     const photoData = await contentfulClient.getEntry(photoID);
@@ -61,21 +61,15 @@ const PhotoPage = () => {
     getPhoto();
   }, []);
 
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setValues({ ...values, [id]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = (data) => {
     dispatch(
       addItem({
         id: photo.id,
         title: photo.title,
         imageURL: photo.imageURL,
-        printType: values.printType,
-        printSize: values.printSize,
-        quantity: Number(values.quantity),
+        printType: data.printType,
+        printSize: data.printSize,
+        quantity: Number(data.quantity),
       })
     );
   };
@@ -89,14 +83,10 @@ const PhotoPage = () => {
       />
       <Heading>{photo.title}</Heading>
       <ParagraphsList paragraphs={isLoading ? [] : photo.description.content} />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <div>Print Type:</div>
-          <select
-            id="printType"
-            value={values.printType}
-            onChange={handleChange}
-          >
+          <select {...register("printType", { required: true })}>
             {printTypes.map((printType) => (
               <option key={printType} value={printType}>
                 {printType}
@@ -107,11 +97,7 @@ const PhotoPage = () => {
 
         <div>
           <div>Print Size:</div>
-          <select
-            id="printSize"
-            value={values.printSize}
-            onChange={handleChange}
-          >
+          <select {...register("printSize", { required: true })}>
             {printSizes.map((printSize) => (
               <option key={printSize} value={printSize}>
                 {printSize}
@@ -124,11 +110,9 @@ const PhotoPage = () => {
           <div>Quantity:</div>
           <input
             type="number"
-            id="quantity"
             min="1"
             max="500"
-            value={values.quantity}
-            onChange={handleChange}
+            {...register("quantity", { required: true, min: 1, max: 500 })}
           />
         </div>
 

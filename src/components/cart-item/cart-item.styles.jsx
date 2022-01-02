@@ -3,18 +3,23 @@ import styled from "styled-components";
 export const CartItemContainer = styled.div`
   text-align: start;
   position: relative;
+  background: #202020;
+  padding: 10px;
+  border-radius: 10px;
 `;
 
 export const ImageContainer = styled.img`
   width: 100%;
   height: auto;
   margin-bottom: 10px;
+  border-radius: 5px;
 `;
 
 export const TitleContainer = styled.div`
   font-size: 1rem;
   width: 100%;
-  color: #cfcfcf;
+  font-weight: bold;
+  margin-bottom: 5px;
 
   &::first-letter {
     text-transform: uppercase;
