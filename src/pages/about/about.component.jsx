@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../../components/footer/footer.component";
 import PageTopper from "../../components/page-topper/page-topper.component";
 import Separator from "../../components/separator/separator.component";
 
@@ -42,6 +43,7 @@ const AboutPage = () => (
     <Separator width="50%" margin="0 auto" />
     <h2>Equipment Used</h2>
     <Separator width="50%" margin="0 auto" />
+    <Footer />
   </AboutPageContainer>
 );
 

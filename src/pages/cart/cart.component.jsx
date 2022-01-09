@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import CartItem from "../../components/cart-item/cart-item.component";
+import Footer from "../../components/footer/footer.component";
 import PageTopper from "../../components/page-topper/page-topper.component";
 import { selectCartItems } from "../../redux/cart/cartSlice";
 
@@ -19,6 +20,7 @@ const CartPage = () => {
           />
         ))}
       </CartItemsContainer>
+      <Footer />
     </CartPageContainer>
   );
 };

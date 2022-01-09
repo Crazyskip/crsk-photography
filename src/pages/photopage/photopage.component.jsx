@@ -17,6 +17,7 @@ import {
   PhotoPageContainer,
   SubmitInput,
 } from "./photopage.styles";
+import Footer from "../../components/footer/footer.component";
 
 const contentful = require("contentful");
 
@@ -113,6 +114,7 @@ const PhotoPage = () => {
 
         <SubmitInput type="submit" value="ADD TO CART" />
       </FormContainer>
+      <Footer />
     </PhotoPageContainer>
   );
 };

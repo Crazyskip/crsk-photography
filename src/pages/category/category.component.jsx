@@ -5,6 +5,7 @@ import { CategoryPageContainer } from "./category.styles";
 
 import PhotoList from "../../components/photo-list/photo-list.component";
 import WithSpinner from "../../components/with-spinner/with-spinner.component";
+import Footer from "../../components/footer/footer.component";
 
 const contentful = require("contentful");
 
@@ -55,6 +56,7 @@ const CategoryPage = () => {
         photos={categoryPhotos}
         type="photo"
       />
+      <Footer />
     </CategoryPageContainer>
   );
 };

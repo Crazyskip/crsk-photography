@@ -5,6 +5,9 @@ export const PhotoPageContainer = styled.div`
   color: #cfcfcf;
   max-width: 90%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 70px);
 
   @media only screen and ${device.sm} {
     max-width: 720px;
@@ -17,7 +20,7 @@ export const PhotoPageContainer = styled.div`
 export const ImageContainer = styled.img`
   width: 100%;
   height: auto;
-  margin-bottom: 10px;
+  margin: 25px 0 10px 0;
 `;
 
 export const Heading = styled.h3`

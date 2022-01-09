@@ -6,6 +6,9 @@ export const CartPageContainer = styled.div`
   text-align: center;
   margin: 0 auto;
   color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 70px);
 
   @media only screen and ${device.sm} {
     max-width: 720px;

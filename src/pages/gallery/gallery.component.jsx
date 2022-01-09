@@ -5,6 +5,7 @@ import { GalleryPageContainer } from "./gallery.styles";
 import PageTopper from "../../components/page-topper/page-topper.component";
 import PhotoList from "../../components/photo-list/photo-list.component";
 import WithSpinner from "../../components/with-spinner/with-spinner.component";
+import Footer from "../../components/footer/footer.component";
 
 const contentful = require("contentful");
 
@@ -43,6 +44,7 @@ const GalleryPage = () => {
         photos={categories}
         type="category"
       />
+      <Footer />
     </GalleryPageContainer>
   );
 };
