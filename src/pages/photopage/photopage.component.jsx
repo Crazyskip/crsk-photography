@@ -36,6 +36,11 @@ const printSizes = [
   "120 x 80cm",
   "150 x 100cm",
 ];
+const defaultValues = {
+  printType: printTypes[0],
+  printSize: printSizes[0],
+  quantity: 1,
+};
 
 const PhotoPage = () => {
   const [photo, setPhoto] = useState({});
@@ -43,15 +48,10 @@ const PhotoPage = () => {
 
   const { photoID } = useParams();
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm({
-    defaultValues: {
-      quantity: 1,
-    },
-  });
+  const { register, handleSubmit, reset } = useForm({ defaultValues });
 
   const getPhoto = async () => {
     const photoData = await contentfulClient.getEntry(photoID);
-
     setPhoto({
       id: photoData.sys.id,
       title: photoData.fields.title,
@@ -66,16 +66,24 @@ const PhotoPage = () => {
   }, []);
 
   const onSubmit = (data) => {
-    dispatch(
-      addItem({
-        id: photo.id,
-        title: photo.title,
-        imageURL: photo.imageURL,
-        printType: data.printType,
-        printSize: data.printSize,
-        quantity: Number(data.quantity),
-      })
-    );
+    console.log(data);
+    if (!printTypes.includes(data.printType)) {
+      alert("Invalid print type");
+    } else if (!printSizes.includes(data.printSize)) {
+      alert("Invalid print size");
+    } else {
+      dispatch(
+        addItem({
+          id: photo.id,
+          title: photo.title,
+          imageURL: photo.imageURL,
+          printType: data.printType,
+          printSize: data.printSize,
+          quantity: Number(data.quantity),
+        })
+      );
+    }
+    reset(defaultValues);
   };
 
   return (
@@ -111,7 +119,6 @@ const PhotoPage = () => {
             max: 500,
           })}
         />
-
         <SubmitInput type="submit" value="ADD TO CART" />
       </FormContainer>
       <Footer />
