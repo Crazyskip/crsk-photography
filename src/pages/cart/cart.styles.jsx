@@ -34,3 +34,7 @@ export const CartItemsContainer = styled.div`
     grid-template-columns: repeat(3, 1fr);
   }
 `;
+
+export const EmptyCartContainer = styled.div`
+  font-size: 2rem;
+`;

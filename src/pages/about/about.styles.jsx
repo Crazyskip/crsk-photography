@@ -17,3 +17,11 @@ export const AboutPageContainer = styled.div`
     max-width: 962px;
   }
 `;
+
+export const ListContainer = styled.ul`
+  list-style-type: none;
+
+  li {
+    margin-bottom: 8px;
+  }
+`;
